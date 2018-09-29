@@ -10,8 +10,9 @@ public class Command {
         this.executableName = executableName;
     }
 
-    public void addArgument(String argument) {
+    public Command addArgument(String argument) {
         arguments.add(argument);
+        return this;
     }
 
     public String getExecutableName() {
