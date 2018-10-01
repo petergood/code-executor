@@ -11,7 +11,7 @@ public class IsolateSandboxCommandCreatorTest {
 
     @Test
     public void Should_CreateCommandToInitializeSandbox() {
-        Command command = IsolateSandboxCommandCreator.initializeSandboxCommand(1);
+        Command command = IsolateSandboxCommandCreator.initializeSandboxCommand("1");
         ArrayList<String> arguments = new ArrayList<>();
         arguments.add("--init");
         arguments.add("--box-id=1");
@@ -25,7 +25,7 @@ public class IsolateSandboxCommandCreatorTest {
         arguments.add("--wall-time=1");
         Command sandboxedCommand = new Command("ls");
         sandboxedCommand.addArgument("-a");
-        Command executionCommand = IsolateSandboxCommandCreator.executeCommand(arguments, 1, sandboxedCommand);
+        Command executionCommand = IsolateSandboxCommandCreator.executeCommand(arguments, "1", sandboxedCommand);
 
         ArrayList<String> expectedArguments = new ArrayList<>();
         expectedArguments.add("--run");
@@ -40,7 +40,7 @@ public class IsolateSandboxCommandCreatorTest {
 
     @Test
     public void Should_CreateCommandToCleanupSandbox() {
-        Command cleanupCommand = IsolateSandboxCommandCreator.cleanupCommand(1);
+        Command cleanupCommand = IsolateSandboxCommandCreator.cleanupCommand("1");
 
         ArrayList<String> expectedArguments = new ArrayList<>();
         expectedArguments.add("--box-id=1");
