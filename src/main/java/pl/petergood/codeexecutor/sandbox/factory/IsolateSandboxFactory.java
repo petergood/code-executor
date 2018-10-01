@@ -1,8 +1,12 @@
-package pl.petergood.codeexecutor.sandbox;
+package pl.petergood.codeexecutor.sandbox.factory;
 
 import pl.petergood.codeexecutor.commandcreator.IsolateSandboxCommandCreator;
 import pl.petergood.codeexecutor.interactor.Interactor;
 import pl.petergood.codeexecutor.interactor.ProcessResult;
+import pl.petergood.codeexecutor.sandbox.IsolateSandbox;
+import pl.petergood.codeexecutor.sandbox.Sandbox;
+import pl.petergood.codeexecutor.sandbox.SandboxConfiguration;
+import pl.petergood.codeexecutor.sandbox.SandboxException;
 
 import java.io.IOException;
 
