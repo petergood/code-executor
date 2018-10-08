@@ -9,14 +9,22 @@ import java.io.InputStreamReader;
 
 public class ShellInteractor implements Interactor {
     private ProcessResult createProcessResult(Process process) throws IOException {
-        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(process.getInputStream()));
-        StringBuilder stdOutBuilder = new StringBuilder();
+        BufferedReader bufferedOutReader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+        BufferedReader bufferedErrReader = new BufferedReader(new InputStreamReader(process.getErrorStream()));
 
-        while (bufferedReader.ready()) {
-            stdOutBuilder.append((char) bufferedReader.read());
+        StringBuilder stdOutBuilder = new StringBuilder();
+        StringBuilder stdErrBuilder = new StringBuilder();
+
+        while (bufferedOutReader.ready()) {
+            stdOutBuilder.append((char) bufferedOutReader.read());
         }
 
-        return new ProcessResult(process.exitValue(), stdOutBuilder.toString());
+        while (bufferedErrReader.ready()) {
+            stdErrBuilder.append((char) bufferedErrReader.read());
+        }
+
+        return new ProcessResult(process.exitValue(),
+                new ProcessOutputStreams(stdOutBuilder.toString(), stdErrBuilder.toString()));
     }
 
     @Override

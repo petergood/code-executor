@@ -2,18 +2,18 @@ package pl.petergood.codeexecutor.interactor;
 
 public class ProcessResult {
     private int exitCode;
-    private String stdOut;
+    private ProcessOutputStreams processOutputStreams;
 
-    public ProcessResult(int exitCode, String stdOut) {
+    public ProcessResult(int exitCode, ProcessOutputStreams processOutputStreams) {
         this.exitCode = exitCode;
-        this.stdOut = stdOut;
+        this.processOutputStreams = processOutputStreams;
     }
 
     public int getExitCode() {
         return exitCode;
     }
 
-    public String getStdOut() {
-        return stdOut;
+    public ProcessOutputStreams getOutput() {
+        return this.processOutputStreams;
     }
 }

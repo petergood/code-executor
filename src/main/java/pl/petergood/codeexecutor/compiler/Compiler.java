@@ -8,6 +8,6 @@ import java.io.IOException;
 
 public interface Compiler {
     String getCompilerExecutableName();
-    Executable compile(ProgramSource programSource) throws IOException, InterruptedException;
+    Executable compile(ProgramSource programSource) throws IOException, InterruptedException, CompilationException;
     Command getProgramExecutionCommand();
 }

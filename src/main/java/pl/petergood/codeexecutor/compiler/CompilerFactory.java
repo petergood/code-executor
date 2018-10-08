@@ -9,7 +9,7 @@ public class CompilerFactory {
             case CPP:
                 return new CppCompiler(interactor);
             default:
-                throw new CompilationException();
+                return null;
         }
     }
 }
