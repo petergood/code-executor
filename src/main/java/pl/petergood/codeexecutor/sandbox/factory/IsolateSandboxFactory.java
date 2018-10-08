@@ -17,10 +17,10 @@ public class IsolateSandboxFactory extends AbstractSandboxFactory {
     }
 
     private String parseIsolateInitializationResult(ProcessResult processResult) throws SandboxException {
-        if (processResult.getStdOut().charAt(0) != '/')
-            throw new SandboxException(processResult.getStdOut());
+        if (processResult.getOutput().getStdOut().charAt(0) != '/')
+            throw new SandboxException(processResult.getOutput().getStdOut());
 
-        return processResult.getStdOut();
+        return processResult.getOutput().getStdOut();
     }
 
     @Override

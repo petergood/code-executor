@@ -1,6 +1,7 @@
 package pl.petergood.codeexecutor.compiler;
 
 import pl.petergood.codeexecutor.Resource;
+import pl.petergood.codeexecutor.commandcreator.CppCompilerCommandCreator;
 import pl.petergood.codeexecutor.interactor.Interactor;
 import pl.petergood.codeexecutor.interactor.ProcessResult;
 import pl.petergood.codeexecutor.interactor.command.Command;
@@ -28,10 +29,10 @@ public class CppCompiler extends AbstractCompiler {
 
     @Override
     public Executable compile(ProgramSource programSource) throws IOException, InterruptedException, CompilationException {
-        Command compilationCommand = new Command(compilerExecutableName);
-        compilationCommand.addArgument(programSource.getSourceFile().getPath());
-        compilationCommand.addArgument("-o");
-        compilationCommand.addArgument(programSource.getSourceFile().getDirectoryPath() + "out");
+        Command compilationCommand = CppCompilerCommandCreator.compilationCommand(
+                programSource.getSourceFile().getPath(),
+                programSource.getSourceFile().getDirectoryPath() + "out"
+        );
 
         ProcessResult compilationResult = getInteractor().executeSync(compilationCommand);
         String compilationErrorMessage = compilationResult.getOutput().getStdErr();
@@ -39,6 +40,6 @@ public class CppCompiler extends AbstractCompiler {
         if (compilationErrorMessage.length() > 0)
             throw new CompilationException(compilationErrorMessage);
 
-        return new Executable(new Resource(programSource.getSourceFile().getPath() + "out"), getProgramExecutionCommand());
+        return new Executable(new Resource(programSource.getSourceFile().getDirectoryPath() + "out"), getProgramExecutionCommand());
     }
 }
