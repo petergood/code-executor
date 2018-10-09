@@ -1,5 +1,6 @@
 package pl.petergood.codeexecutor.sandbox;
 
+import pl.petergood.codeexecutor.Resource;
 import pl.petergood.codeexecutor.commandcreator.IsolateSandboxCommandCreator;
 import pl.petergood.codeexecutor.interactor.Interactor;
 import pl.petergood.codeexecutor.interactor.command.Command;
@@ -22,5 +23,16 @@ public class IsolateSandbox extends AbstractSandbox {
     public void cleanup() throws IOException, InterruptedException {
         Command cleanupCommand = IsolateSandboxCommandCreator.cleanupCommand(getSandboxConfiguration().getSandboxId());
         getInteractor().executeSync(cleanupCommand);
+    }
+
+    @Override
+    public void copyToSandbox(ArrayList<Resource> resources) throws IOException, InterruptedException {
+        for (Resource resource : resources) {
+            Command copyCommand = new Command("cp");
+            copyCommand.addArgument(resource.getPath());
+            copyCommand.addArgument(getSandboxConfiguration().getSandboxPath());
+
+            getInteractor().executeSync(copyCommand);
+        }
     }
 }
