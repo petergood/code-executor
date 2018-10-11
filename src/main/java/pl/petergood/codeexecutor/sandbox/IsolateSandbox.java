@@ -29,7 +29,9 @@ public class IsolateSandbox extends AbstractSandbox {
     public void copyToSandbox(Resource resource) throws IOException, InterruptedException {
         Command copyCommand = new Command("cp");
         copyCommand.addArgument(resource.getPath());
-        copyCommand.addArgument(getSandboxConfiguration().getSandboxPath());
+        copyCommand.addArgument(getSandboxConfiguration().getSandboxPath() + "/box/");
+
+        resource.setPath(getSandboxConfiguration().getSandboxPath() + "/box/");
 
         getInteractor().executeSync(copyCommand);
     }

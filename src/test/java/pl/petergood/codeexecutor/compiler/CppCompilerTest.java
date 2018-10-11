@@ -23,12 +23,12 @@ public class CppCompilerTest {
         when(mockedInteractor.executeSync(any(Command.class))).thenReturn(new ProcessResult(0,
                 new ProcessOutputStreams("", "")));
 
-        ProgramSource source = new ProgramSource(Language.CPP, new Resource("/var/test.cpp"));
+        ProgramSource source = new ProgramSource(Language.CPP, new Resource("/var", "test.cpp"));
         Compiler compiler = CompilerFactory.create(Language.CPP, mockedInteractor);
 
         Executable executable = compiler.compile(source);
 
-        assertEquals("/var/out", executable.getExecutableResource().getPath());
+        assertEquals("/var/out", executable.getExecutableResource().getFullPath());
     }
 
     @Test(expected = CompilationException.class)
@@ -37,7 +37,7 @@ public class CppCompilerTest {
         when(mockedInteractor.executeSync(any(Command.class))).thenReturn(new ProcessResult(0,
                 new ProcessOutputStreams("", "Compilation error.")));
 
-        ProgramSource source = new ProgramSource(Language.CPP, new Resource("/var/test.cpp"));
+        ProgramSource source = new ProgramSource(Language.CPP, new Resource("/var", "test.cpp"));
         Compiler compiler = CompilerFactory.create(Language.CPP, mockedInteractor);
 
         Executable executable = compiler.compile(source);

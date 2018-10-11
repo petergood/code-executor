@@ -31,8 +31,8 @@ public class CppCompiler extends AbstractCompiler {
     @Override
     public Executable compile(ProgramSource programSource) throws IOException, InterruptedException, CompilationException {
         Command compilationCommand = CppCompilerCommandCreator.compilationCommand(
-                programSource.getSourceFile().getPath(),
-                programSource.getSourceFile().getDirectoryPath() + "out"
+                programSource.getSourceFile().getFullPath(),
+                programSource.getSourceFile().getPath() + "out"
         );
 
         ProcessResult compilationResult = getInteractor().executeSync(compilationCommand);
@@ -41,6 +41,6 @@ public class CppCompiler extends AbstractCompiler {
         if (compilationErrorMessage.length() > 0)
             throw new CompilationException(compilationErrorMessage);
 
-        return new CppExecutable(new Resource(programSource.getSourceFile().getDirectoryPath() + "out"));
+        return new CppExecutable(new Resource(programSource.getSourceFile().getPath(), "out"));
     }
 }

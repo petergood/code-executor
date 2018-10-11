@@ -12,11 +12,11 @@ public class TestCase {
         this.output = output;
     }
 
-    public Resource getInput() {
+    public Resource getInputResource() {
         return input;
     }
 
-    public Resource getOutput() {
+    public Resource getOutputResource() {
         return output;
     }
 }

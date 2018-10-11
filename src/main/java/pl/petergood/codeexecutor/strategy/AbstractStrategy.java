@@ -43,4 +43,8 @@ public abstract class AbstractStrategy implements Strategy {
     public Interactor getInteractor() {
         return interactor;
     }
+
+    public Sandbox getSandbox() {
+        return sandbox;
+    }
 }

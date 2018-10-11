@@ -6,16 +6,16 @@ import static org.junit.Assert.*;
 public class ResourceTest {
 
     @Test
-    public void Should_ReturnResourceDirectory_When_GivenRelativePath() {
-        Resource resource = new Resource("this/is/a/test/test.txt");
+    public void Should_ReturnFullPath() {
+        Resource resource = new Resource("/this/is/a/test", "test.txt");
 
-        assertEquals("this/is/a/test/", resource.getDirectoryPath());
+        assertEquals("/this/is/a/test/test.txt", resource.getFullPath());
     }
 
     @Test
-    public void Should_ReturnResourceDirectory_When_GivenAbsolutePath() {
-        Resource resource = new Resource("/this/is/a/test/test.txt");
+    public void Should_ReturnFullPath_When_TrailingSlashIsPresent() {
+        Resource resource = new Resource("/this/is/a/test/", "test.txt");
 
-        assertEquals("/this/is/a/test/", resource.getDirectoryPath());
+        assertEquals("/this/is/a/test/test.txt", resource.getFullPath());
     }
 }

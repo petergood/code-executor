@@ -2,30 +2,30 @@ package pl.petergood.codeexecutor;
 
 public class Resource {
     private String path;
+    private String resourceName;
 
-    public Resource(String path) {
+    public Resource(String path, String resourceName) {
         this.path = path;
+        this.resourceName = resourceName;
+
+        if (path.charAt(path.length() - 1) != '/') {
+            this.path += "/";
+        }
     }
 
     public String getPath() {
         return path;
     }
 
-    public String getDirectoryPath() {
-        StringBuilder directoryPath = new StringBuilder();
+    public void setPath(String newPath) {
+        this.path = newPath;
+    }
 
-        if (path.charAt(0) == '/')
-            directoryPath.append("/");
+    public String getResourceName() {
+        return resourceName;
+    }
 
-        String[] directoryParts = path.split("/");
-
-        for (int i = 0; i < directoryParts.length - 1; i++) {
-            if (directoryParts[i].length() > 0) {
-                directoryPath.append(directoryParts[i]);
-                directoryPath.append("/");
-            }
-        }
-
-        return directoryPath.toString();
+    public String getFullPath() {
+        return path + resourceName;
     }
 }
